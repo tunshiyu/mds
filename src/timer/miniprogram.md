@@ -153,41 +153,42 @@ Page({
 </view>
 ```
 
-## 七、 小程序API使用
+## 七、 小程序 API 使用
 
-####  客户端数据存储
+#### 客户端数据存储
 
-wx.setStorageSync()方法属于小程序的客户端数据储存 API，用于将数据写入客户端储存。它接受两个参数，分别是键名和键值。与之配套的，还有一个wx.getStorageSync()方法，用于读取客户端储存的数据。它只有一个参数，就是键名。这两个方法都是同步的。
+wx.setStorageSync()方法属于小程序的客户端数据储存 API，用于将数据写入客户端储存。它接受两个参数，分别是键名和键值。与之配套的，还有一个 wx.getStorageSync()方法，用于读取客户端储存的数据。它只有一个参数，就是键名。这两个方法都是同步的。
 必须牢记的是，**客户端储存是不可靠的，**随时可能消失（比如用户清理缓存）。用户换了一台手机，或者本机重装微信，原来的数据就丢失了。所以，它只适合保存一些不重要的临时数据，最常见的用途一般就是作为缓存，加快页面显示。
 
-####  远程数据存储
+#### 远程数据存储
 
 1、本地开发时，需要勾选 (不校验合法域名...)。因为微信规定，只有后台登记过的服务器域名才可以进行通信。
 
-2、 通过wx.request()进行小程序的网络请求。
+2、 通过 wx.request()进行小程序的网络请求。
+
 ```js
-  wx.request({
-      url: 'http://localhost:3000/items',
-      success(res) {
-        that.setData({ items: res.data });
-      }
-    });
+wx.request({
+  url: 'http://localhost:3000/items',
+  success(res) {
+    that.setData({ items: res.data });
+  },
+});
 ```
 
 #### 用户信息展示
 
-<open-data>组件的type属性指定所要展示的信息类型，userAvatarUrl表示展示用户头像，userNickName表示用户昵称。
+<open-data />组件的 type 属性指定所要展示的信息类型，userAvatarUrl 表示展示用户头像，userNickName 表示用户昵称。
 
-<open-data>不需要用户授权，也不需要登录，所以用起来很方便。但也是因为这个原因，小程序不允许用户脚本读取<open-data>返回的信息。
+<open-data />不需要用户授权，也不需要登录，所以用起来很方便。但也是因为这个原因，小程序不允许用户脚本读取<open-data />返回的信息。
 
 #### 获取用户信息
 
 如果想拿到用户的个人信息，必须得到授权。官方建议，通过按钮方式获取授权。
 
 ```js
- <button open-type="getUserInfo" bind:getuserinfo="buttonHandler">
-    授权获取用户个人信息
-  </button>
+<button open-type="getUserInfo" bind:getuserinfo="buttonHandler">
+  授权获取用户个人信息
+</button>
 ```
 
 ```js
@@ -196,8 +197,8 @@ Page({
   buttonHandler(event) {
     if (!event.detail.userInfo) return;
     this.setData({
-      name: event.detail.userInfo.nickName
+      name: event.detail.userInfo.nickName,
     });
-  }
+  },
 });
 ```
