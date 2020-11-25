@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "@tarojs/components": "^3.0.16",
     "react": "^16.12.0"
   },
   "devDependencies": {
