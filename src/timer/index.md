@@ -8,6 +8,23 @@
 
 filterOption 做下拉过滤,onchange 做数据过滤
 
+```js
+allowClear
+              showSearch
+              options={storeOption}
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                !!(
+                  option?.label &&
+                  option?.label
+                    .toString()
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                )
+              }
+              maxTagCount={10}
+```
+
 ## 3、 为什么 react16+ ref 变成了变量而不是以前的 string 类型
 
 forwardRef 解决 HOC 组件传递 ref 的问题。因为 ref 变成了参数，string ref 就没法用了。
