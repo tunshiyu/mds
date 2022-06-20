@@ -4,7 +4,7 @@
  * @作者: 于效仟
  * @Date: 2022-05-18 10:27:24
  * @LastEditors: 于效仟
- * @LastEditTime: 2022-05-18 10:27:25
+ * @LastEditTime: 2022-06-20 11:18:42
 -->
 
 背景
@@ -19,6 +19,8 @@
 
 此时方法有两种，第一种，通过 postmessage 通信调用父级页面提供的弹窗。
 // 子页面发通知
+
+```JS
 window.parent.postMessage(
 {
 type: 'close',
@@ -39,8 +41,9 @@ setstate(false)
 }, [])
 第二种是通过 antd modal 提供的 API getContainer，指定 Modal 挂载的 HTML 节点到子页面父级容器。
 <Modal
-...
+// ...
 getContainer={() => window.parent.document.body}
+```
 
 > 加入如上代码，弹窗是可以居中了，但是由于 dom 被挂载到外层，但是样式还在原本子应用内，所以样式丢失了，如图中“哈哈哈”文字不再是红色。并且如果有多个浮层，每个浮层都需要手动加 getContainer，这种方式也显得十分笨重。
 
@@ -48,6 +51,8 @@ getContainer={() => window.parent.document.body}
 难道就没有其他的办法了吗？
 如果父页面写一个全屏样式的 iframe，背景透明，子页面承载抽屉组件，也就是 iframe 包裹抽屉。效果怎么样？我们来试一下。
 父页面代码
+
+```JS
 function Demo() {
 const [state, setstate] = useState(true)
 useEffect(() => {
@@ -93,7 +98,12 @@ background-color: transparent;
     }
 
 }
-父页面 index.html 加入 <bodystyle="background-color: transparent;overflow: hidden">来还原遮罩层效果。
+```
+
+父页面 index.html 加入
+
+```JS
+<bodystyle="background-color: transparent;overflow: hidden">来还原遮罩层效果。
 子页面代码
 <Drawer
 title={renderTitle()}
@@ -114,10 +124,11 @@ location: 'Modal',
 width={600}
 
 >
+</Drawer>
+```
 
     功能DEMO
 
-</Drawer>
 效果如下图所示，录制软件有卡顿情况，实际效果流畅。
 
 总结

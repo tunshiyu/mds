@@ -4,7 +4,7 @@
  * @作者: 于效仟
  * @Date: 2021-02-02 09:54:07
  * @LastEditors: 于效仟
- * @LastEditTime: 2021-02-02 09:54:15
+ * @LastEditTime: 2022-06-20 11:21:18
 -->
 
 ## Redash 前端二次开发之地图修改
@@ -93,7 +93,7 @@ const regexMap = {
 
 `viz-lib/src/visualizations/choropleth/Editor/FormatSettings.jsx中按照代码修改`
 
-在</ContextHelp>前面加如下，为了热力图映射
+在`</ContextHelp>`前面加如下，为了热力图映射
 
 ```js
 {
